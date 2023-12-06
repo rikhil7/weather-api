@@ -5,6 +5,7 @@
   color: white;
 }
 #parent {
+  /* position: relative; */
   padding-top: 10vmin;
   padding-bottom: 10vmin;
   display: flex;
@@ -20,6 +21,15 @@
     rgba(9, 9, 121, 1) 35%,
     rgba(0, 212, 255, 1) 100%
   );
+}
+#loading{
+  position: fixed;
+  margin-top: 40vh;
+  filter: invert(1);
+  visibility: hidden;
+}
+#loading img{
+  width: 12vmax;
 }
 #search input {
   width: 30vmax;

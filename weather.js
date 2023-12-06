@@ -16,6 +16,7 @@ let weather = document.querySelector("#weather");
 let clouds = document.querySelector("#clouds");
 let minTemp = document.querySelector("#min");
 let maxTemp = document.querySelector("#max");
+let loading = document.querySelector("#loading")
 searchBtn.addEventListener("click", () => {
   city = search.value;
   url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=d1af11863e98978623a60680a4c73960`;
@@ -32,10 +33,13 @@ search.addEventListener("keypress", (e) => {
 });
 async function getData() {
   try {
-    hideDiv.style.visibility = "visible";
+    hideDiv.style.visibility = "hidden"
+    loading.style.visibility = "visible"
     let res = await axios.get(url);
     allData = res.data;
-    console.log(res.data);
+    // res.addEventListener("load",()=>{
+    // })
+    // console.log(res.data);
     cityName.textContent = city;
     date.innerText = "(GMT Date)  " + currentDate.slice(0, 16);
     let kelvinWeather = allData.main.temp;
@@ -44,6 +48,10 @@ async function getData() {
     clouds.textContent = allData.weather["0"].description;
     minTemp.textContent = `${Math.floor(allData.main.temp_min - 273.15)}°C / `;
     maxTemp.textContent = Math.floor(allData.main.temp_max - 273.15) + "°C";
+    setTimeout(() => {
+      loading.style.visibility = "hidden"
+      hideDiv.style.visibility = "visible"
+    }, 500);
     // console.log(allData.main.temp)
   } catch (error) {
     console.log(`Error: ${error}`);
@@ -54,6 +62,10 @@ async function getData() {
       maxTemp.textContent = "";
       minTemp.textContent = "";
       weather.textContent = "Enter a City Name";
+      setTimeout(() => {
+        loading.style.visibility = "hidden"
+        hideDiv.style.visibility = "visible"
+      }, 500);
     } else {
       cityName.textContent = "";
       date.textContent = "";
@@ -61,7 +73,11 @@ async function getData() {
       maxTemp.textContent = "";
       minTemp.textContent = "";
       weather.textContent = "Invalid City";
+      setTimeout(() => {
+        loading.style.visibility = "hidden"
+        hideDiv.style.visibility = "visible"
+      }, 500);  
     }
   }
 }
-console.log(currDate1);
+// console.log(currDate1);
