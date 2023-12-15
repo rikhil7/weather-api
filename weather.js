@@ -72,7 +72,7 @@ async function getData() {
       clouds.textContent = "";
       maxTemp.textContent = "";
       minTemp.textContent = "";
-      weather.textContent = "Invalid City";
+      weather.textContent = "Invalid City or No Internet Connection";
       setTimeout(() => {
         loading.style.visibility = "hidden"
         hideDiv.style.visibility = "visible"
